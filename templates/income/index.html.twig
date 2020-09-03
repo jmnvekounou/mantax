@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Income index{% endblock %}
+
+{% block body %}
+    <h1>Income index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Billnumber</th>
+                <th>Amount</th>
+                <th>Tps</th>
+                <th>Tvq</th>
+                <th>Tvh</th>
+                <th>Total</th>
+                <th>ReceivedAt</th>
+                <th>CreatedAt</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for income in incomes %}
+            <tr>
+                <td>{{ income.id }}</td>
+                <td>{{ income.billnumber }}</td>
+                <td>{{ income.amount }}</td>
+                <td>{{ income.tps }}</td>
+                <td>{{ income.tvq }}</td>
+                <td>{{ income.tvh }}</td>
+                <td>{{ income.total }}</td>
+                <td>{{ income.receivedAt ? income.receivedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ income.createdAt ? income.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('income_show', {'id': income.id}) }}">show</a>
+                    <a href="{{ path('income_edit', {'id': income.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="10">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('income_new') }}">Create new</a>
+{% endblock %}
